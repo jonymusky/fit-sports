@@ -1,9 +1,10 @@
-fs = require('fs');
-fit = require('fit');
+var app = require("express")();
+var bodyParser = require('body-parser');
 
-var fitFileBuffer = fs.readFileSync(__dirname + "/fit_test/example.fit");
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-fit.parse(fitFileBuffer,function(err, data) {
-    console.log(data);
-    console.log(data['sessions'][0]['laps']);
-});
+var routesFit = require('./routes/fit');
+app.use('/fit', routesFit);
+
+app.listen(process.env.PORT || 3002);
