@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <form ref='uploadForm'
+            id='uploadForm'
+            action='/fit/upload'
+            method='post'
+            encType="multipart/form-data">
+                <div>
+                  1. Add your fit file: <input type="file" name="sampleFile" />
+                </div>
+                <div>
+                  2. Select the format that you want:
+                <select name="format">
+                  <option value="JSON">JSON</value>
+                  <option value="CSV">CSV</value>
+                </select>
+              </div>
+              <div>
+                2. Select if you want to download or see the data:
+              <select name="output">
+                <option value="DOWNLOAD">DOWNLOAD</value>
+                <option value="VIEW">VIEW</value>
+              </select>
+            </div>
+              <div>
+                <input type='submit' value='Convert' />
+              </div>
+        </form>
+    </body>
+</html>
