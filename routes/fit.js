@@ -21,11 +21,21 @@ router.post('/upload', function(req, res) {
   });
 });
 
+router.get("/example/laps", function(req, res) {
+  var format = 'JSON';
+  fitHelper.readAndParse('example.fit', format, function(data){
+    data = JSON.parse(data);
+    res.end(JSON.stringify(data.sessions[0].laps));
+  });
+});
+
 router.get("/example", function(req, res) {
   var format = req.query.format || 'JSON';
   fitHelper.readAndParse('example.fit', format, function(data){
     res.end(data);
   });
 });
+
+
 
 module.exports = router;

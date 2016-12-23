@@ -8,11 +8,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 // default options
 app.use(fileUpload());
-
+app.disable('etag');
 
 var routesFit = require('./routes/fit');
 app.use('/fit', routesFit);
 
 app.use(express.static('dist'));
 
-app.listen(process.env.PORT || 3003);
+app.listen(process.env.PORT || 3004);
