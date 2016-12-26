@@ -8,6 +8,8 @@ router.post('/upload', function(req, res) {
   var format = req.body.format || 'JSON';
   var output = req.body.output || 'VIEW';
 
+  var removeAltitude = req.body['remove-altitude'] ? true : false;
+
   if (!req.files) {
           res.send('No files were uploaded.');
           return;
@@ -17,6 +19,9 @@ router.post('/upload', function(req, res) {
       if(output != 'VIEW'){
         res.setHeader('Content-disposition', 'attachment; filename='+sampleFile.name+'.'+format.toLowerCase());
       }
+      if(removeAltitude){
+        data = fitHelper.removeAltitude(data);
+      }
       res.end(data);
   });
 });
@@ -24,7 +29,11 @@ router.post('/upload', function(req, res) {
 router.get("/example/laps", function(req, res) {
   var format = 'JSON';
   fitHelper.readAndParse('example.fit', format, function(data){
+    var toRet = {};
     data = JSON.parse(data);
+    for(i=0;i<(data.sessions[0].laps.length);i++){
+
+    }
     res.end(JSON.stringify(data.sessions[0].laps));
   });
 });

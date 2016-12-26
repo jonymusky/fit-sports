@@ -23,5 +23,30 @@ module.exports = {
         callback(JSON.stringify(data));
       }
     });
+  },
+  removeAltitude: function(jsonString){
+    var data = JSON.parse(jsonString);
+    for(i=0;i<data.sessions.length; i++){
+      if(data.sessions[i].totalAscent){
+        data.sessions[i].totalAscent = 0;
+      }
+      if(data.sessions[i].totalDescent){
+        data.sessions[i].totalDescent = 0;
+      }
+      for(j=0;j<data.sessions[i].laps.length; j++){
+        if(data.sessions[i].laps[j].totalDescent){
+          data.sessions[i].laps[j].totalDescent = 0;
+        }
+        if(data.sessions[i].laps[j].totalAscent){
+          data.sessions[i].laps[j].totalAscent = 0;
+        }
+      }
+    }
+    for(j=0;j<data.records.length;j++){
+      if(data.records[j].altitude){
+        data.records[j].altitude = 0;
+      }
+    }
+    return JSON.stringify(data);
   }
 };
